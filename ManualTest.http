@@ -1,0 +1,139 @@
+###register
+
+POST http://localhost:8081/api/register
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "lana",
+  "password": "lana",
+  "name": "lana"
+}
+
+###Logout
+DELETE http://localhost:8081/api/auth/logout
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: test
+
+###Login
+POST http://localhost:8081/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+
+{
+  "username": "lana",
+  "password": "lana"
+}
+
+### GET Current User
+GET http://localhost:8081/api/currentUser
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 506f75b8-b2b9-456d-b7a1-8c032492e899
+
+
+### Update Current User
+PATCH http://localhost:8081/api/currentUser
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 506f75b8-b2b9-456d-b7a1-8c032492e899
+
+{
+"name": "Muhammad Lana Jauhar"
+}
+
+### Create Contact SUCCES
+POST http://localhost:8081/api/contacts/create
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 506f75b8-b2b9-456d-b7a1-8c032492e899
+
+{
+  "firstName": "jeki",
+  "lastName": "joks",
+  "email": "example@email.com",
+  "phone": "12345678901"
+}
+### Create Contact Failed
+POST http://localhost:8081/api/contacts/create
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 506f75b8-b2b9-456d-b7a1-8c032492e899
+
+{
+  "firstName": "ahmad",
+  "lastName": "Fadil",
+  "email": "example@email.com",
+  "phone": "12345678901"
+}
+
+### Search Contact
+GET http://localhost:8081/api/contacts
+Accept: application/json
+X-API-TOKEN: 506f75b8-b2b9-456d-b7a1-8c032492e899
+
+
+### Get Contact
+GET http://localhost:8081/api/contacts/d96e66be-4426-4bc1-af27-ba5b8ec8df17
+Accept: application/json
+X-API-TOKEN: 2d97185a-83ae-40d8-99da-1ec8b6e34d43
+
+
+### Update Contact
+PUT http://localhost:8081/api/contacts/d96e66be-4426-4bc1-af27-ba5b8ec8df17
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 506f75b8-b2b9-456d-b7a1-8c032492e899
+
+{
+  "firstName": "Ika",
+  "lastName": "fadila",
+  "email": "example@email.com",
+  "phone": "12345678"
+}
+
+### Delete Contact
+DELETE http://localhost:8081/api/contacts/0961b08a-b21b-40d9-b663-e62e1a791387
+Accept: application/json
+X-API-TOKEN: 2d97185a-83ae-40d8-99da-1ec8b6e34d43
+
+### Create Address
+POST http://localhost:8081/api/contacts/d96e66be-4426-4bc1-af27-ba5b8ec8df17/addresses
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 506f75b8-b2b9-456d-b7a1-8c032492e899
+
+{
+  "street": "jalan 2",
+  "city": "semarang1",
+  "province": "jawa tengah1",
+  "country": "Indonesia1",
+  "postalCode": "90191"
+}
+
+### List Address
+GET http://localhost:8081/api/contacts/d96e66be-4426-4bc1-af27-ba5b8ec8df17/addresses
+Accept: application/json
+X-API-TOKEN: 506f75b8-b2b9-456d-b7a1-8c032492e899
+
+
+### Update Address
+PUT http://localhost:8081/api/contacts/492c65d0-0ff7-4c21-90a0-bfdad5486363/addresses/d5ad7956-4685-4dbc-8b48-083dfca3233d
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 8086a574-102a-4ce8-a9bd-7cdb7dfdaf05
+
+{
+  "street": "jalan 1",
+  "city": "semarang1",
+  "province": "jawa tengah1",
+  "country": "Indonesia1",
+  "postalCode": "90191"
+}
+
+### Delete Address
+DELETE http://localhost:8081/api/contacts/492c65d0-0ff7-4c21-90a0-bfdad5486363/addresses/d5ad7956-4685-4dbc-8b48-083dfca3233d
+Accept: application/json
+X-API-TOKEN: 8086a574-102a-4ce8-a9bd-7cdb7dfdaf05
