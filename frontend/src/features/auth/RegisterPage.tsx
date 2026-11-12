@@ -20,7 +20,7 @@ interface FieldErrors {
 
 export function RegisterPage() {
   const navigate = useNavigate()
-  const token = useAuthStore((s) => s.token)
+  const authenticated = useAuthStore((s) => s.authenticated)
   const login = useAuthStore((s) => s.login)
   const formRef = useRef<HTMLFormElement>(null)
   const [form, setForm] = useState({ name: '', username: '', password: '' })
@@ -28,7 +28,7 @@ export function RegisterPage() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
-  if (token) return <Navigate to="/contacts" replace />
+  if (authenticated) return <Navigate to="/contacts" replace />
 
   const validate = (): boolean => {
     const errors: FieldErrors = {}
@@ -62,7 +62,7 @@ export function RegisterPage() {
         username: form.username.trim(),
         password: form.password,
       })
-      login(data.token, data.expired_at)
+      login(data.expired_at)
       navigate('/contacts', { replace: true })
     } catch (err) {
       setError(getErrorMessage(err, 'Gagal mendaftar. Coba lagi.'))

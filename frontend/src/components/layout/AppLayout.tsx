@@ -17,7 +17,7 @@ const NAV_ITEMS = [
  * Di bawah itu: bottom navigation bar.
  */
 export function AppLayout() {
-  const token = useAuthStore((s) => s.token)
+  const authenticated = useAuthStore((s) => s.authenticated)
   const user = useAuthStore((s) => s.user)
   const setUser = useAuthStore((s) => s.setUser)
   const clearSession = useAuthStore((s) => s.clearSession)
@@ -27,7 +27,7 @@ export function AppLayout() {
   const [loggingOut, setLoggingOut] = useState(false)
 
   useEffect(() => {
-    if (token && !user) {
+    if (authenticated && !user) {
       userService
         .getCurrentUser()
         .then(({ data }) => setUser(data))
@@ -35,7 +35,7 @@ export function AppLayout() {
           // 401 sudah ditangani lib/api.ts (sesi dibersihkan → redirect login).
         })
     }
-  }, [token, user, setUser])
+  }, [authenticated, user, setUser])
 
   const handleLogout = async () => {
     setLoggingOut(true)

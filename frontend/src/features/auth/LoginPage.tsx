@@ -17,7 +17,7 @@ interface FieldErrors {
 
 export function LoginPage() {
   const navigate = useNavigate()
-  const token = useAuthStore((s) => s.token)
+  const authenticated = useAuthStore((s) => s.authenticated)
   const login = useAuthStore((s) => s.login)
   const formRef = useRef<HTMLFormElement>(null)
   const [form, setForm] = useState({ username: '', password: '' })
@@ -26,7 +26,7 @@ export function LoginPage() {
   const [loading, setLoading] = useState(false)
 
   // Sudah login → langsung ke daftar kontak.
-  if (token) return <Navigate to="/contacts" replace />
+  if (authenticated) return <Navigate to="/contacts" replace />
 
   const validate = (): boolean => {
     const errors: FieldErrors = {}
@@ -53,7 +53,7 @@ export function LoginPage() {
         username: form.username.trim(),
         password: form.password,
       })
-      login(data.token, data.expired_at)
+      login(data.expired_at)
       navigate('/contacts', { replace: true })
     } catch (err) {
       setError(getErrorMessage(err, 'Gagal masuk. Periksa kembali username dan password.'))
