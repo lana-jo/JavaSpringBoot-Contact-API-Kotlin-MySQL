@@ -34,3 +34,7 @@ target/
 
 ### Local secrets ###
 src/main/resources/application-local.properties
+
+### Editor artifacts ###
+.zcode/
+
