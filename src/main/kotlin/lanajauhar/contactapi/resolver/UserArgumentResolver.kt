@@ -3,6 +3,7 @@ package lanajauhar.contactapi.resolver
 import jakarta.servlet.http.HttpServletRequest
 import lanajauhar.contactapi.entity.User
 import lanajauhar.contactapi.repository.UserRepository
+import lanajauhar.contactapi.controller.AuthController.Companion.COOKIE_NAME
 import org.springframework.core.MethodParameter
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
@@ -28,7 +29,11 @@ class UserArgumentResolver(
         binderFactory: WebDataBinderFactory?
     ): Any {
         val servletRequest = webRequest.getNativeRequest(HttpServletRequest::class.java)
+        // Header (mobile) atau cookie HttpOnly (web) — keduanya valid.
         val token = servletRequest?.getHeader("X-API-TOKEN")
+            ?: servletRequest?.cookies
+                ?.firstOrNull { it.name == COOKIE_NAME }
+                ?.value
         if (token == null) {
             throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "Tidak Terdaftar")
         }

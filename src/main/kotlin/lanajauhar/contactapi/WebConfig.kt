@@ -1,7 +1,10 @@
 package lanajauhar.contactapi
 
+import lanajauhar.contactapi.config.CsrfCookieFilter
 import lanajauhar.contactapi.config.RateLimitInterceptor
 import lanajauhar.contactapi.resolver.UserArgumentResolver
+import org.springframework.boot.web.servlet.FilterRegistrationBean
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.servlet.config.annotation.CorsRegistry
@@ -15,6 +18,15 @@ class WebConfig(
 ) : WebMvcConfigurer {
     override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {
         resolvers.add(userArgumentResolver)
+    }
+
+    @Bean
+    fun csrfCookieFilterRegistration(): FilterRegistrationBean<CsrfCookieFilter> {
+        val registration = FilterRegistrationBean<CsrfCookieFilter>()
+        registration.setFilter(CsrfCookieFilter())
+        registration.addUrlPatterns("/api/*")
+        registration.setOrder(1)
+        return registration
     }
 
     override fun addInterceptors(registry: InterceptorRegistry) {
