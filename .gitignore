@@ -31,3 +31,6 @@ target/
 !**/src/**/wrapper/
 !.mvn/wrapper/maven-wrapper.jar
 !.mvn/wrapper/maven-wrapper.properties
+
+### Local secrets ###
+src/main/resources/application-local.properties

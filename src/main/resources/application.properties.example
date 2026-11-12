@@ -1,0 +1,5 @@
+# Copy to application-local.properties (or set env vars) and fill in real values.
+# NEVER commit real credentials.
+spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3306/contact_api}
+spring.datasource.username=<your-db-user>
+spring.datasource.password=<your-db-password>

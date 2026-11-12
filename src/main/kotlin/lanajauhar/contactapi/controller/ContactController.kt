@@ -52,6 +52,7 @@ class ContactController(
     @GetMapping(path = ["/api/contacts"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun search(
         user: User,
+        @RequestParam(value = "query", required = false) query: String?,
         @RequestParam(value = "name", required = false) name: String?,
         @RequestParam(value = "email", required = false) email: String?,
         @RequestParam(value = "phone", required = false) phone: String?,
@@ -59,6 +60,7 @@ class ContactController(
         @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
     ): WebResponse<List<ContactResponse>> {
         val req = SearchContactRequest().apply {
+            this.query = query
             this.name = name
             this.email = email
             this.phone = phone

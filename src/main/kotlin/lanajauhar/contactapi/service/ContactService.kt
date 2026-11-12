@@ -71,19 +71,31 @@ class ContactService(
         val specification = Specification<Contact> { root, criteriaQuery, cb ->
             val predicates = mutableListOf<Predicate>()
             predicates.add(cb.equal(root.get<Any>("user"), user))
-            if (req.name != null) {
+            if (!req.query.isNullOrBlank()) {
+                val q = "%${req.query}%"
                 predicates.add(
                     cb.or(
-                        cb.like(root.get("firstName"), "%" + req.name + "%"),
-                        cb.like(root.get("lastName"), "%" + req.name + "%")
+                        cb.like(root.get("firstName"), q),
+                        cb.like(root.get("lastName"), q),
+                        cb.like(root.get("email"), q),
+                        cb.like(root.get("phone"), q)
                     )
                 )
-            }
-            if (req.phone != null) {
-                predicates.add(cb.like(root.get("phone"), "%" + req.phone + "%"))
-            }
-            if (req.email != null) {
-                predicates.add(cb.like(root.get("email"), "%" + req.email + "%"))
+            } else {
+                if (req.name != null) {
+                    predicates.add(
+                        cb.or(
+                            cb.like(root.get("firstName"), "%" + req.name + "%"),
+                            cb.like(root.get("lastName"), "%" + req.name + "%")
+                        )
+                    )
+                }
+                if (req.phone != null) {
+                    predicates.add(cb.like(root.get("phone"), "%" + req.phone + "%"))
+                }
+                if (req.email != null) {
+                    predicates.add(cb.like(root.get("email"), "%" + req.email + "%"))
+                }
             }
             criteriaQuery.where(*predicates.toTypedArray()).restriction
         }

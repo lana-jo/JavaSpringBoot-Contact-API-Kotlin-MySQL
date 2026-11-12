@@ -6,6 +6,7 @@ class SearchContactRequest {
     var name: String? = null
     var email: String? = null
     var phone: String? = null
+    var query: String? = null
 
     @NotNull
     var page: Int? = 0

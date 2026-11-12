@@ -41,4 +41,7 @@ class User {
 
     @OneToMany(mappedBy = "user")
     var contacts: List<Contact> = emptyList()
+
+    override fun toString(): String =
+        "User(username=$username, name=$name, tokenExpiredAt=$tokenExpiredAt)"
 }

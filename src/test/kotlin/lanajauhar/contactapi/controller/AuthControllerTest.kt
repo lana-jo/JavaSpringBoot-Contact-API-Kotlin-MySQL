@@ -43,8 +43,12 @@ class AuthControllerTest {
     @Autowired
     private lateinit var objectMapper: ObjectMapper
 
+    @Autowired
+    private lateinit var rateLimitInterceptor: lanajauhar.contactapi.config.RateLimitInterceptor
+
     @BeforeEach
     fun setUp() {
+        rateLimitInterceptor.reset()
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build()
         addressRepository.deleteAll()
         contactRepository.deleteAll()
